@@ -5,7 +5,6 @@ from fibonacci_heap_mod import Fibonacci_heap
 
 
 __all__ = ['dijkstra']
-SHORTEST, SECURE, INSECURE = 1, 2, 3
 
 
 def prefer_shortest(graph, next_sys):
@@ -48,17 +47,14 @@ def path(prev, start, end):
     return list(s)
 
 
-def cost_fn(flag):
-    """Select a cost function depending on the flag."""
-    if flag is SECURE:
-        return prefer_safest
-    elif flag is INSECURE:
-        return prefer_less_safe
-    else:
-        return prefer_shortest
+cost_fn = {
+    "secure": prefer_safest,
+    "insecure": prefer_less_safe,
+    "shortest": prefer_shortest,
+}
 
 
-def dijkstra(graph, start, end, flag=SHORTEST):
+def dijkstra(graph, start, end, flag="shortest"):
     """Given a graph, calculates the shortest path between a
     start- and an end-vertex.
 
@@ -71,7 +67,7 @@ def dijkstra(graph, start, end, flag=SHORTEST):
 
     remaining = set([end])
 
-    weight_fn = cost_fn(flag)
+    weight_fn = cost_fn[flag]
     costs[start] = 0.0
 
     q = Fibonacci_heap()
