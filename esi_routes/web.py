@@ -6,13 +6,12 @@ from flask import request
 import esi
 
 from esi_routes.graph import Graph
-from esi_routes.graph import GraphLoader
 from esi_routes.dijkstra import dijkstra
 from esi_routes.overlay import AvoidanceOverlay
 from esi_routes.overlay import ConnectionOverlay
 
 
-DEFAULT_UNIVERSE = Graph(GraphLoader.load_starmap())
+DEFAULT_UNIVERSE = Graph()
 
 
 @esi.endpoint(versions=["latest", "legacy", "dev", "v1"], cached=86400)
@@ -87,6 +86,7 @@ def route_get_v1(origin, destination):
 
           schema:
             type: array
+            maxItems: 1000
             description: Solar systems in route
             items:
               description: Solar system in route

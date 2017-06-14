@@ -12,6 +12,8 @@ esi = SwaggerClient.from_url("https://esi.tech.ccp.is/latest/swagger.json")
 
 
 def retry_get(function, **params):
+    """Retry the function return's `result` method until it succeeds."""
+
     while True:
         try:
             return function(**params).result()
@@ -21,6 +23,8 @@ def retry_get(function, **params):
 
 
 def system_get(system):
+    """Get details for a single system."""
+
     system_details = retry_get(
         esi.Universe.get_universe_systems_system_id,
         system_id=system,
@@ -44,6 +48,8 @@ def system_get(system):
 
 
 def main():
+    """Generate the jumpmap.json with ESI."""
+
     systems = {}
     all_systems = retry_get(esi.Universe.get_universe_systems)
     num_systems = len(all_systems)

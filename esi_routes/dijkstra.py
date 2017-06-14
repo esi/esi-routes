@@ -14,11 +14,15 @@ def prefer_shortest(graph, next_sys):
     search for safest route.
 
     Returning a constant such as 1.0 allows us to look for the
-    fastest route, but it does makes the Dijkstra beeing effectively a BFS."""
+    fastest route, but it does makes the Dijkstra beeing effectively a BFS.
+    """
+
     return 1.0
 
 
 def prefer_safest(graph, next_sys):
+    """Return a weight for prefering the safest route."""
+
     if graph.security(next_sys) < 0.45:  # low/null
         return 50000.0
     else:
@@ -26,6 +30,8 @@ def prefer_safest(graph, next_sys):
 
 
 def prefer_less_safe(graph, next_sys):
+    """Return a weight for prefering the less safe route."""
+
     if graph.security(next_sys) >= 0.45:  # high sec
         return 50000.0
     else:
@@ -34,6 +40,7 @@ def prefer_less_safe(graph, next_sys):
 
 def path(prev, start, end):
     """Traverse the `prev`-map backwards and obtain."""
+
     s = deque([])
     u = end
     while u != start:
@@ -55,12 +62,13 @@ cost_fn = {
 
 
 def dijkstra(graph, start, end, flag="shortest"):
-    """Given a graph, calculates the shortest path between a
-    start- and an end-vertex.
+    """Calculate the shortest path between a start- and an end-vertex.
 
     `graph` needs to support at least neighbors(n) which returns a list of new
     nodes and weight(a,b) returning a float value. Smaller weights are
-    preferred by the algorithm."""
+    preferred by the algorithm.
+    """
+
     prev = {}
     costs = {}
     entry = {}
