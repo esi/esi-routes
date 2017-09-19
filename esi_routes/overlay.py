@@ -1,7 +1,10 @@
+"""User-supplied details to overlay on top of Graph objects."""
+
+
 class Overlay(object):
     """Base class for both Avoidance and Connection overlays."""
 
-    def __init(self, graph):
+    def __init__(self, graph):
         """Initialize with the default universe Graph object."""
 
         self._graph = graph
@@ -23,7 +26,7 @@ class AvoidanceOverlay(Overlay):
     def __init__(self, graph, avoidance_list):
         """Initialize with the default universe Graph and a list of systems."""
 
-        self._graph = graph
+        super(AvoidanceOverlay, self).__init__(graph)
         self._avoidance_list = avoidance_list
 
     def update(self, avoidance_list):
@@ -47,7 +50,7 @@ class ConnectionOverlay(Overlay):
     def __init__(self, graph, connections):
         """Create a new connection overlay object."""
 
-        self._graph = graph
+        super(ConnectionOverlay, self).__init__(graph)
         self._connections = connections
 
     def update(self, connections):

@@ -3,12 +3,12 @@
 
 import time
 import json
-
-from bravado.client import SwaggerClient
 from concurrent.futures import ThreadPoolExecutor
 
+from bravado.client import SwaggerClient
 
-esi = SwaggerClient.from_url("https://esi.tech.ccp.is/latest/swagger.json")
+
+ESI = SwaggerClient.from_url("https://esi.tech.ccp.is/latest/swagger.json")
 
 
 def retry_get(function, **params):
@@ -26,7 +26,7 @@ def system_get(system):
     """Get details for a single system."""
 
     system_details = retry_get(
-        esi.Universe.get_universe_systems_system_id,
+        ESI.Universe.get_universe_systems_system_id,
         system_id=system,
     )
 
@@ -37,7 +37,7 @@ def system_get(system):
 
     for gate in system_details["stargates"]:
         gate_details = retry_get(
-            esi.Universe.get_universe_stargates_stargate_id,
+            ESI.Universe.get_universe_stargates_stargate_id,
             stargate_id=gate,
         )
         this_system["neighbors"].append(
@@ -51,7 +51,7 @@ def main():
     """Generate the jumpmap.json with ESI."""
 
     systems = {}
-    all_systems = retry_get(esi.Universe.get_universe_systems)
+    all_systems = retry_get(ESI.Universe.get_universe_systems)
     num_systems = len(all_systems)
     complete = 0
 
