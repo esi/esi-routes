@@ -5,10 +5,12 @@ import time
 import json
 from concurrent.futures import ThreadPoolExecutor
 
-from bravado.client import SwaggerClient
-
-
-ESI = SwaggerClient.from_url("https://esi.tech.ccp.is/latest/swagger.json")
+try:
+    from bravado.client import SwaggerClient
+except ImportError:
+    print("You need to install the generate extras to use this")
+else:
+    ESI = SwaggerClient.from_url("https://esi.tech.ccp.is/latest/swagger.json")
 
 
 def retry_get(function, **params):
@@ -50,11 +52,14 @@ def system_get(system):
 def main():
     """Generate the jumpmap.json with ESI."""
 
-    systems = {}
-    all_systems = retry_get(ESI.Universe.get_universe_systems)
+    try:
+        all_systems = retry_get(ESI.Universe.get_universe_systems)
+    except NameError:
+        raise SystemExit(1)
+
     num_systems = len(all_systems)
     complete = 0
-
+    systems = {}
     with ThreadPoolExecutor(max_workers=100) as executor:
         for future in executor.map(system_get, all_systems):
             complete += 1
