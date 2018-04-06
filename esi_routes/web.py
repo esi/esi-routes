@@ -1,8 +1,6 @@
 """ESI web handler(s)."""
 
 
-from flask import request
-
 import esi
 
 from esi_routes.graph import Graph
@@ -15,7 +13,7 @@ DEFAULT_UNIVERSE = Graph()
 
 
 @esi.endpoint(versions=["latest", "legacy", "dev", "v1"], cached=86400)
-def route_get_v1(origin, destination):
+def route_get_v1(origin, destination, ctx):
     """/route/{origin}/{destination}/:
     get:
       description: Get the systems between origin and destination
@@ -100,12 +98,12 @@ def route_get_v1(origin, destination):
 
     systems = dijkstra(
         ConnectionOverlay(
-            AvoidanceOverlay(DEFAULT_UNIVERSE, request.args.get("avoid", [])),
-            request.args.get("connections", []),
+            AvoidanceOverlay(DEFAULT_UNIVERSE, ctx.args.get("avoid", [])),
+            ctx.args.get("connections", []),
         ),
         origin,
         destination,
-        flag=request.args["flag"],
+        flag=ctx.args["flag"],
     )
 
     if not systems:

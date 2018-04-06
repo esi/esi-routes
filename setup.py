@@ -15,7 +15,7 @@ setup(
     author="",
     author_email="",
     url="",
-    install_requires=["esi", "fibonacci-heap-mod"],
+    install_requires=["esi >= 0.8.0", "fibonacci-heap-mod"],
     extras_require={"generate": ["bravado"]},
     package_data={"esi_routes": ["jumpmap.json"]},
     include_package_data=True,
