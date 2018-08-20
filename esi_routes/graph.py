@@ -23,7 +23,7 @@ def _load_starmap():
         return {int(k): v for k, v in json.load(open_jump_map).items()}
 
 
-class Graph(object):
+class Graph:
     """Created once during app init, this is the default universe."""
 
     def __init__(self):

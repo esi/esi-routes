@@ -1,7 +1,7 @@
 """User-supplied details to overlay on top of Graph objects."""
 
 
-class Overlay(object):
+class Overlay:
     """Base class for both Avoidance and Connection overlays."""
 
     def __init__(self, graph):
