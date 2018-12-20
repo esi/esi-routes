@@ -1,6 +1,6 @@
 # ESI Routes
 
-This is the routing service for ESI, available at https://esi.tech.ccp.is/latest/#/Routes
+This is the routing service for ESI, available at https://esi.evetech.net/ui/?version=_dev#/Routes
 
 This project was initially called eve-pathfinder, and was a collaboration between previous and current CCP developers during Fanfest 2016. The initial plan was to release it as a standalone API, but was not quite finished before work on ESI began.
 
