@@ -30,7 +30,7 @@ def retry_get(function, **params):
     for _ in range(3):
         try:
             return function(**params).result()
-        except Exception as error:
+        except Exception as error:  # pylint: disable=broad-except
             print("Error: {}".format(
                 error.response.text if  # pylint: disable=no-member
                 getattr(error, "response", None) else
