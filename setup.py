@@ -1,9 +1,8 @@
 """EVE Swagger Interface - Endpoint."""
 
-
+import os
 from setuptools import setup, find_packages
 from setuphelpers import long_description, git_version, test_command
-
 
 setup(
     name="esi-routes",
@@ -15,7 +14,10 @@ setup(
     author="",
     author_email="",
     url="",
-    install_requires=["esi", "fibonacci-heap-mod"],
+    install_requires=[
+        "esi >= 1.2.9" if os.getenv("USE_INSTALLED_ESI_VERSION", 0) != "1" else
+        "esi", "fibonacci-heap-mod"
+    ],
     extras_require={"generate": ["bravado"]},
     package_dir={"esi_routes": "esi_routes"},
     package_data={"esi_routes": ["jumpmap.json"]},
