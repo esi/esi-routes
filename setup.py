@@ -15,8 +15,9 @@ setup(
     author_email="",
     url="",
     install_requires=[
-        "esi >= 1.2.9" if os.getenv("USE_INSTALLED_ESI_VERSION", 0) != "1" else
-        "esi", "fibonacci-heap-mod"
+        "esi >= 1.3.7" 
+        if os.getenv("USE_INSTALLED_ESI_VERSION", 0) != "1" else "esi", 
+        "fibonacci-heap-mod",
     ],
     extras_require={"generate": ["bravado"]},
     package_dir={"esi_routes": "esi_routes"},
