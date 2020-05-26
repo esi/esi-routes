@@ -50,7 +50,7 @@ def route_get_v1(origin, destination, ctx):
           in: query
           type: array
           description: connected solar system pairs
-          maxItems: 300
+          maxItems: 200
           uniqueItems: true
           items:
             type: array
