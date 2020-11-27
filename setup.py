@@ -15,7 +15,7 @@ setup(
     author_email="",
     url="",
     install_requires=[
-        "esi >= 1.7.2"
+        "esi >= 1.7.9"
         if os.getenv("USE_INSTALLED_ESI_VERSION", 0) != "1" else "esi",
         "fibonacci-heap-mod",
     ],
