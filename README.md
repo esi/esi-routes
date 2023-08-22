@@ -11,3 +11,11 @@ To this end, all storage (caching), validation, and server boilerplate was remov
 The ESI framework (esi-lib) is not yet open source. As such, you will not yet be able to actually run this codebase.
 
 The intention of open sourcing this endpoint is not its interactions with esi-lib (which are minimal anyway), but rather because of its standalone nature, and the promise we made to our collaborators. So although you will not be able to fully run this, the hope is that we can work together to make this the best EVE Online routing API possible.
+
+## Updating the map data
+
+The jump map file can be updated with the `generate_data.py` script. To run it in a Docker container, you can use:
+
+```shell
+docker run --rm -it -v ${PWD}:/src -w /src/esi_routes python sh -c "pip install bravado && python generate_data.py"
+```
