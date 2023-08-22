@@ -40,7 +40,7 @@ def route_get_v1(origin, destination, ctx):
           in: query
           description: avoid solar system ID(s)
           type: array
-          maxItems: 100
+          maxItems: 200
           uniqueItems: true
           items:
             type: integer
@@ -50,7 +50,7 @@ def route_get_v1(origin, destination, ctx):
           in: query
           type: array
           description: connected solar system pairs
-          maxItems: 100
+          maxItems: 200
           uniqueItems: true
           items:
             type: array
