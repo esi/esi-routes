@@ -12,7 +12,15 @@ from esi_routes.overlay import ConnectionOverlay
 DEFAULT_UNIVERSE = Graph()
 
 
-@esi.endpoint(versions=["latest", "legacy", "dev", "v1"], cached=86400)
+@esi.endpoint(
+    versions=["latest", "legacy", "dev", "v1"],
+    cached=86400,
+    changes={
+        "2024-07-11": "Add stargates for Intaki-Amygnon and Athounon-Samanuni, "
+                      "bump the security status for the Intaki system to 0.6, "
+                      "as per [this PR](https://github.com/esi/esi-routes/pull/12)."
+    }
+)
 def route_get_v1(origin, destination, ctx):
     """/route/{origin}/{destination}/:
     get:
